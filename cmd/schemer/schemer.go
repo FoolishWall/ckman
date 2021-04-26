@@ -84,7 +84,7 @@ func getObjectListFromClickHouse(db *sql.DB, query string) (names, statements []
 
 // getCreateReplicaObjects returns a list of objects that needs to be created on a host in a cluster
 func getCreateReplicaObjects(db *sql.DB) (names, statements []string, err error) {
-	system_tables := fmt.Sprintf("remote('%s', system, tables)", cmdOps.SrcHost)
+	system_tables := fmt.Sprintf("remote('%s', system, tables, '%s', '%s')", cmdOps.SrcHost, cmdOps.ChUser, cmdOps.ChPassword)
 
 	sqlDBs := heredoc.Doc(strings.ReplaceAll(`
 		SELECT DISTINCT 

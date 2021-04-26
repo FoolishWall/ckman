@@ -22,6 +22,8 @@ import (
 // - If inserting to the partition during FETCH(node2)-ATTACH(node2)-DROP(node1), you get data loss.
 // - Non-replicated table doesn't support this command.
 
+//编译指令make backend
+
 type CmdOptions struct {
 	ShowVer    bool
 	ChHosts    string
