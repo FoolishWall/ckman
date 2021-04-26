@@ -143,8 +143,9 @@ func (this *CKRebalance) GetState(database string, table string) (tbls []*TblPar
 			return
 		}
 		defer rows.Close()
+		tablename := fmt.Sprintf("%s.%s", database, table)
 		tbl := TblPartitions{
-			Table:      table,
+			Table:      tablename,
 			Host:       host,
 			Partitions: make(map[string]int64),
 		}
@@ -158,7 +159,6 @@ func (this *CKRebalance) GetState(database string, table string) (tbls []*TblPar
 			tbl.Partitions[patt] = compressed
 			tbl.TotalSize += compressed
 		}
-		tablename := fmt.Sprintf("%s.%s", database, table)
 		if host2ZooPath, ok := this.RepTables[tablename]; ok {
 			tbl.ZooPath = host2ZooPath[host]
 		}
